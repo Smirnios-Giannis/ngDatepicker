@@ -9,6 +9,7 @@ angular.module('jkuri.datepicker', [])
 		scope.locale = attrs.locale || 'en';
 		scope.firstWeekDaySunday = scope.$eval(attrs.firstWeekDaySunday) || false; 
 		scope.placeholder = attrs.placeholder || '';
+		scope.clearDateEnabled = attrs.clearDate ? 'ng-datepicker-input-clear-date' : '';
 	};
 
 	return {
@@ -100,9 +101,16 @@ angular.module('jkuri.datepicker', [])
 				scope.viewValue = selectedDate.format(scope.viewFormat);
 				scope.closeCalendar();
 			};
+			
+			scope.clearDate = function (event) {
+				event.preventDefault();
+				ngModel.$setViewValue(undefined);
+				scope.viewValue = undefined;
+				scope.closeCalendar();
+			};
 
 			// if clicked outside of calendar
-			var classList = ['ng-datepicker', 'ng-datepicker-input'];
+			var classList = ['ng-datepicker', 'ng-datepicker-input', 'ng-datepicker-input-cont'];
             if (attrs.id !== undefined) classList.push(attrs.id);
 			$document.on('click', function (e) {
 				if (!scope.calendarOpened) return;
@@ -139,7 +147,10 @@ angular.module('jkuri.datepicker', [])
 
 		},
 		template: 
-		'<div><input type="text" ng-focus="showCalendar()" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}"></div>' +
+		'<div class="ng-datepicker-input-cont {{ clearDateEnabled }}">' +
+			'<i ng-click="clearDate($event)" class="fa fa-times ng-datepicker-input-clear-icon"></i>' +
+			'<input type="text" ng-focus="showCalendar()" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}">' +
+		'</div>' +
 		'<div class="ng-datepicker" ng-show="calendarOpened">' +
 		'  <div class="controls">' +
 		'    <div class="left">' +

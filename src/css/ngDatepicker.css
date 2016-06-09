@@ -12,6 +12,31 @@
 	padding: 0;
 }
 
+.ng-datepicker-input-cont > .ng-datepicker-input-clear-icon{
+    display: none;
+}
+
+.ng-datepicker-input-clear-date.ng-datepicker-input-cont {
+    position: relative;
+}
+
+.ng-datepicker-input-clear-date.ng-datepicker-input-cont > .ng-datepicker-input-clear-icon {
+    display: block;
+    color: #565a5c;
+    top: 5px;
+    left: 5px;
+    position: absolute;
+}
+
+.ng-datepicker-input-clear-date.ng-datepicker-input-cont > .ng-datepicker-input-clear-icon:hover {
+    color: #ff5c5b;
+    cursor: pointer;
+}
+
+.ng-datepicker-input-clear-date.ng-datepicker-input-cont > .ng-datepicker-input {
+    padding-left: 20px;
+}
+
 .ng-datepicker > .controls {
 	width: 250px;
 	display: inline-block;
